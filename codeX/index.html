@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>codeX | Harshit Gupta</title>
+    <link rel="stylesheet" href="h.css">
+    
+  </head>
+
+  <body>
+    <div id="copy-alert">copy to clipboard</div>
+    <header>
+      <div class="logo">code<span>X</span></div>
+    </header>
+    <main class="container">
+      <section class="left-section">
+        <div class="box">
+          <div class="label-box">
+            <div class="left-label">
+              <img src="img/html.svg" alt="">
+              <label> HTML</label>
+            </div>
+            <div class="right-label">
+              <button class="copy-btn" onclick="copyCode('html-code')">
+                <img src="img/copy.svg" alt="" >
+              </button>
+            </div>
+          </div>
+          <textarea name="" id="html-code" onkeyup="run()"></textarea>
+        </div>
+        <div class="box">
+          <div class="label-box">
+            <div class="left-label">
+              <img src="img/css.svg" alt="">
+              <label>CSS</label>
+            </div>
+            <div class="right-label">
+              <button class="copy-btn" onclick="copyCode('css-code')">
+                <img src="img/copy.svg" alt="" >
+              </button>
+            </div>
+          </div>
+          <textarea name="" id="css-code" onkeyup="run()"></textarea>
+        </div>
+        <div class="box">
+          <div class="label-box">
+            <div class="left-label">
+              <img src="img/js.svg" alt="">
+              <label>JS</label>
+            </div>
+            <div class="right-label">
+              <button class="copy-btn" onclick="copyCode('js-code')">
+                <img src="img/copy.svg" alt="" >
+              </button>
+            </div>
+          </div>
+          <textarea name="" id="js-code" onkeyup="run()"></textarea>
+        </div>
+      </section>
+      <section class="right-section">
+        <iframe frameborder="0" id="output-frame"></iframe>
+      </section>
+    </main>
+    <script>
+      // functioning of editor
+      function run() {
+        let htmlCode = document.getElementById("html-code").value;
+        let cssCode = document.getElementById("css-code").value;
+        let jsCode = document.getElementById("js-code").value;
+        let outputFrame = document.getElementById("output-frame");
+        outputFrame.contentDocument.body.innerHTML =
+          htmlCode + "<style>" + cssCode + "</style>";
+        outputFrame.contentWindow.eval(jsCode);
+      }
+      //copy to clipboard
+      function copyCode(id) {
+        var copyText = document.getElementById(id);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+
+        // Show the copy alert
+        var alertElement = document.getElementById("copy-alert");
+        alertElement.classList.add("show");
+
+        // Hide the alert
+        setTimeout(function () {
+          alertElement.classList.remove("show");
+        }, 5000);
+      }
+    </script>
+  </body>
+</html>
